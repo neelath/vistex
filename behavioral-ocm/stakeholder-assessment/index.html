@@ -54,81 +54,13 @@
             padding: 4px;
         }
 
-        /* Accessibility improvements */
         .nav-item {
             padding: 12px 24px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
-            color: #aaa; /* Improved contrast from #888 */
-        }
-
-        .survey-subtitle {
-            font-size: 16px;
-            color: #aaa; /* Improved contrast from #888 */
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .question-subtitle {
-            font-size: 14px;
-            color: #aaa; /* Improved contrast from #888 */
-            margin-bottom: 30px;
-        }
-
-        .scale-label {
-            font-size: 12px;
-            color: #aaa; /* Improved contrast from #888 */
-            text-align: center;
-            max-width: 90px;
-            line-height: 1.3;
-        }
-
-        .metric-label {
-            font-size: 12px;
-            color: #aaa; /* Improved contrast from #888 */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Print styles for PDF export */
-        @media print {
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            
-            .header, .footer, .nav {
-                display: none !important;
-            }
-            
-            .page:not(.active) {
-                display: none !important;
-            }
-            
-            .insight-card {
-                background: white !important;
-                border: 1px solid #ccc !important;
-                box-shadow: none !important;
-                page-break-inside: avoid;
-                margin-bottom: 20px;
-            }
-            
-            .insights-dashboard {
-                grid-template-columns: 1fr 1fr !important;
-                gap: 15px !important;
-            }
-            
-            .card-title, .card-value {
-                color: black !important;
-            }
-            
-            .insight-text {
-                background: #f5f5f5 !important;
-                border-left: 4px solid #64ffda !important;
-                color: black !important;
-            }
+            color: #aaa;
         }
 
         .nav-item:hover {
@@ -155,6 +87,257 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Introduction Page Styles */
+        .intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            margin-bottom: 50px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #64ffda);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(100,255,218,0.1);
+            border: 1px solid #64ffda;
+            border-radius: 20px;
+            color: #64ffda;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .problem-card, .solution-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .problem-card {
+            border-left: 4px solid #f87171;
+        }
+
+        .solution-card {
+            border-left: 4px solid #64ffda;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .problem-card .card-title {
+            color: #f87171;
+        }
+
+        .solution-card .card-title {
+            color: #64ffda;
+        }
+
+        .process-timeline {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 50px;
+        }
+
+        .timeline-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            color: #ffffff;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, #64ffda, #00bfa5);
+            z-index: 1;
+        }
+
+        .timeline-step {
+            background: rgba(255,255,255,0.02);
+            border: 2px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-step.current {
+            border-color: #64ffda;
+            background: rgba(100,255,218,0.08);
+            transform: scale(1.05);
+        }
+
+        .timeline-step.upcoming {
+            opacity: 0.6;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #64ffda;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .step-desc {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        .why-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .why-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            border-color: #444;
+        }
+
+        .why-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(100,255,218,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+
+        .why-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .why-desc {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            background: rgba(100,255,218,0.05);
+            border: 1px solid #64ffda;
+            border-radius: 20px;
+            padding: 50px;
+        }
+
+        .cta-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #64ffda;
+        }
+
+        .cta-desc {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #64ffda, #00bfa5);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(100,255,218,0.3);
+        }
+
+        /* Survey styles */
         .survey-container {
             max-width: 900px;
             margin: 0 auto;
@@ -181,7 +364,7 @@
 
         .survey-subtitle {
             font-size: 16px;
-            color: #888;
+            color: #aaa;
             margin-bottom: 30px;
             line-height: 1.6;
         }
@@ -242,7 +425,7 @@
 
         .question-subtitle {
             font-size: 14px;
-            color: #888;
+            color: #aaa;
             margin-bottom: 30px;
         }
 
@@ -294,7 +477,7 @@
 
         .scale-label {
             font-size: 12px;
-            color: #888;
+            color: #aaa;
             text-align: center;
             max-width: 90px;
             line-height: 1.3;
@@ -377,23 +560,6 @@
             color: #666;
         }
 
-        .btn {
-            padding: 16px 32px;
-            background: linear-gradient(135deg, #64ffda, #00bfa5);
-            border: none;
-            border-radius: 12px;
-            color: #000;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(100,255,218,0.3);
-        }
-
         .btn-secondary {
             background: transparent;
             border: 1px solid #444;
@@ -406,6 +572,16 @@
             box-shadow: none;
         }
 
+        .survey-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        /* Insights Dashboard Styles */
         .insights-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -453,12 +629,6 @@
             margin-bottom: 25px;
         }
 
-        .card-title {
-            font-size: 20px;
-            font-weight: 500;
-            color: #ffffff;
-        }
-
         .card-value {
             font-size: 38px;
             font-weight: 300;
@@ -474,10 +644,6 @@
             gap: 5px;
         }
 
-        .trend-indicator.down {
-            color: #f87171;
-        }
-
         .chart-container {
             height: 220px;
             background: rgba(255,255,255,0.01);
@@ -488,28 +654,6 @@
             justify-content: center;
             position: relative;
             border: 1px solid #1a1a1a;
-        }
-
-        .bar-chart {
-            display: flex;
-            align-items: end;
-            height: 160px;
-            gap: 15px;
-            padding: 25px;
-        }
-
-        .bar {
-            background: linear-gradient(to top, #64ffda, #00bfa5);
-            border-radius: 6px 6px 0 0;
-            min-width: 35px;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .bar:hover {
-            opacity: 1;
-            transform: scaleY(1.05);
         }
 
         .donut-chart {
@@ -541,31 +685,6 @@
             color: #64ffda;
         }
 
-        .action-items {
-            list-style: none;
-            margin-top: 25px;
-        }
-
-        .action-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #2a2a2a;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .action-item:last-child {
-            border-bottom: none;
-        }
-
-        .action-item::before {
-            content: '→';
-            color: #64ffda;
-            margin-right: 12px;
-            font-weight: bold;
-        }
-
         .insight-text {
             background: rgba(100,255,218,0.08);
             border-left: 4px solid #64ffda;
@@ -574,79 +693,6 @@
             margin: 25px 0;
             font-style: italic;
             color: #ddd;
-        }
-
-        .metric-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin: 25px 0;
-        }
-
-        .metric-item {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            border: 1px solid #2a2a2a;
-        }
-
-        .metric-value {
-            font-size: 28px;
-            font-weight: 600;
-            color: #64ffda;
-            margin-bottom: 5px;
-        }
-
-        .metric-label {
-            font-size: 12px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .sentiment-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            height: 100%;
-            padding: 20px;
-        }
-
-        .sentiment-item {
-            text-align: center;
-        }
-
-        .sentiment-emoji {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 24px;
-            border: 3px solid;
-            transition: transform 0.3s ease;
-        }
-
-        .sentiment-item:hover .sentiment-emoji {
-            transform: scale(1.1);
-        }
-
-        .sentiment-positive .sentiment-emoji {
-            background: rgba(74, 222, 128, 0.1);
-            border-color: #4ade80;
-        }
-
-        .sentiment-neutral .sentiment-emoji {
-            background: rgba(156, 163, 175, 0.1);
-            border-color: #9ca3af;
-        }
-
-        .sentiment-negative .sentiment-emoji {
-            background: rgba(251, 113, 113, 0.1);
-            border-color: #f87171;
         }
 
         .footer {
@@ -659,6 +705,23 @@
         }
 
         @media (max-width: 768px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .timeline::before {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
             .scale-container {
                 flex-direction: column;
                 gap: 20px;
@@ -683,17 +746,106 @@
         <div class="header">
             <div class="logo">KANDHA <span class="logo-accent">OCM</span></div>
             <div class="nav">
-                <div class="nav-item active" id="survey-nav" role="button" tabindex="0" aria-label="Switch to pulse survey">Pulse Survey</div>
-                <div class="nav-item" id="insights-nav" role="button" tabindex="0" aria-label="Switch to live insights dashboard">Live Insights</div>
+                <div class="nav-item active" id="intro-nav" role="button" tabindex="0" aria-label="Project Overview">Overview</div>
+                <div class="nav-item" id="survey-nav" role="button" tabindex="0" aria-label="Stakeholder Assessment">Assessment</div>
+                <div class="nav-item" id="insights-nav" role="button" tabindex="0" aria-label="Behavioral Insights">Insights</div>
+            </div>
+        </div>
+
+        <!-- Introduction Page -->
+        <div id="intro" class="page active">
+            <div class="intro-container">
+                <div class="hero-section">
+                    <div class="hero-badge">STEP 1: PRE-UAT ASSESSMENT</div>
+                    <h1 class="hero-title">Vistex Implementation Success</h1>
+                    <p class="hero-subtitle">Before we begin UAT testing, we need to understand our team's readiness, concerns, and preferred learning approaches to ensure maximum adoption success.</p>
+                </div>
+
+                <div class="problem-solution">
+                    <div class="problem-card">
+                        <h2 class="card-title">🚨 The Traditional Approach Risk</h2>
+                        <ul style="color: #ccc; line-height: 1.8; margin-left: 20px;">
+                            <li><strong>Blind UAT:</strong> Start testing without understanding user readiness</li>
+                            <li><strong>Generic Training:</strong> One-size-fits-all approach ignores individual needs</li>
+                            <li><strong>Late Discovery:</strong> Find resistance issues during go-live when it's too late</li>
+                            <li><strong>70% Failure Rate:</strong> Industry standard for change initiatives</li>
+                        </ul>
+                    </div>
+
+                    <div class="solution-card">
+                        <h2 class="card-title">✅ Our Human-Centered Approach</h2>
+                        <ul style="color: #ccc; line-height: 1.8; margin-left: 20px;">
+                            <li><strong>Behavioral Assessment:</strong> Understand confidence and concerns upfront</li>
+                            <li><strong>Personalized UAT:</strong> Tailor testing approach to learning preferences</li>
+                            <li><strong>Predictive Insights:</strong> Identify and address risks before they impact timeline</li>
+                            <li><strong>82% Success Rate:</strong> Data-driven interventions deliver results</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="process-timeline">
+                    <h2 class="timeline-title">Vistex Implementation Roadmap</h2>
+                    <div class="timeline">
+                        <div class="timeline-step current">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Stakeholder Assessment</div>
+                            <div class="step-desc">Survey dist/sales team readiness, concerns, and learning preferences</div>
+                        </div>
+                        <div class="timeline-step upcoming">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Personalized UAT</div>
+                            <div class="step-desc">Design testing approach based on behavioral insights</div>
+                        </div>
+                        <div class="timeline-step upcoming">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Targeted Training</div>
+                            <div class="step-desc">Deliver customized learning experiences</div>
+                        </div>
+                        <div class="timeline-step upcoming">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Confident Go-Live</div>
+                            <div class="step-desc">Launch with high adoption success prediction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-section">
+                    <div class="why-card">
+                        <div class="why-icon">🎯</div>
+                        <h3 class="why-title">Know Before We Go</h3>
+                        <p class="why-desc">Identify confidence levels, specific concerns, and learning preferences before UAT begins, not after issues arise.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">⚡</div>
+                        <h3 class="why-title">Efficient UAT Design</h3>
+                        <p class="why-desc">Tailor testing scenarios to actual user preferences - hands-on vs. documentation vs. peer learning.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">🎛️</div>
+                        <h3 class="why-title">Risk Mitigation</h3>
+                        <p class="why-desc">Address training concerns, complexity worries, and time impact fears with targeted interventions.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">📊</div>
+                        <h3 class="why-title">Predictive Success</h3>
+                        <p class="why-desc">Use behavioral data to predict adoption success and optimize our approach in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h2 class="cta-title">Ready to Start Smart?</h2>
+                    <p class="cta-desc">Take 2 minutes to complete this behavioral assessment. Your insights will help us design a UAT experience that ensures your success with the new Vistex system.</p>
+                    <a href="#" class="btn" id="start-assessment">Begin Stakeholder Assessment</a>
+                </div>
             </div>
         </div>
 
         <!-- Survey Page -->
-        <div id="survey" class="page active">
+        <div id="survey" class="page">
             <div class="survey-container">
                 <div class="survey-header">
-                    <h1 class="survey-title">Solenis Implementation Pulse</h1>
-                    <p class="survey-subtitle">Your insights help us create a personalized change experience that ensures your success</p>
+                    <h1 class="survey-title">Vistex Pre-UAT Assessment</h1>
+                    <p class="survey-subtitle">Your insights help us design a UAT experience tailored to ensure your success</p>
                     <div class="progress-container">
                         <div class="progress-bar">
                             <div class="progress-fill"></div>
@@ -704,8 +856,8 @@
 
                 <div class="question">
                     <div class="question-number">1</div>
-                    <h2 class="question-title">How confident do you feel about using the new Solenis system?</h2>
-                    <p class="question-subtitle">Your honest assessment helps us provide the right level of support</p>
+                    <h2 class="question-title">How confident do you feel about learning and using the new Vistex system?</h2>
+                    <p class="question-subtitle">Your honest assessment helps us provide the right level of support during UAT</p>
                     
                     <div class="scale-container">
                         <div class="scale-point" data-value="1" role="button" tabindex="0" aria-label="Rate confidence as 1 - Very concerned">
@@ -733,499 +885,251 @@
 
                 <div class="question">
                     <div class="question-number">2</div>
-                    <h2 class="question-title">What are your biggest concerns about the upcoming changes?</h2>
-                    <p class="question-subtitle">Select up to 2 that resonate most with you</p>
+                    <h2 class="question-title">What are your biggest concerns about this upcoming system change?</h2>
+                    <p class="question-subtitle">Select up to 2 that worry you most - this helps us address them proactively</p>
                     
                     <div class="checkbox-group">
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Learning new processes will take too long</span>
+                            <span>Learning new processes will take too much time</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>System will be more complicated than current process</span>
+                            <span>New system will be more complicated than current process</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Won't get enough training/support</span>
+                            <span>Won't receive adequate training and support</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>It will slow down my daily work initially</span>
+                            <span>It will slow down my daily productivity initially</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Worried about making mistakes</span>
+                            <span>Worried about making errors during transition</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Not sure how this benefits my role</span>
+                            <span>Don't understand how this change benefits my role</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="question">
                     <div class="question-number">3</div>
-                    <h2 class="question-title">How would you prefer to learn the new system?</h2>
-                    <p class="question-subtitle">Select your top 2 preferences</p>
+                    <h2 class="question-title">How do you learn new systems most effectively?</h2>
+                    <p class="question-subtitle">Select your top 2 preferred learning methods - helps us design optimal UAT approach</p>
                     
                     <div class="checkbox-group">
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Hands-on practice with real scenarios</span>
+                            <span>Hands-on practice with guided instruction</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Step-by-step written guides</span>
+                            <span>Step-by-step written documentation</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>One-on-one coaching support</span>
+                            <span>Video tutorials and demonstrations</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Learning alongside a colleague</span>
+                            <span>Learning alongside peers in small groups</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Video tutorials I can replay</span>
+                            <span>One-on-one coaching sessions</span>
                         </div>
                         <div class="checkbox-item">
                             <div class="checkbox"></div>
-                            <span>Trial and error with good help available</span>
+                            <span>Trial and error exploration</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="question">
                     <div class="question-number">4</div>
-                    <h2 class="question-title">What would make you feel successful with this change?</h2>
-                    <p class="question-subtitle">Share your ideal outcome in your own words</p>
-                    <textarea class="text-input" placeholder="I would feel successful when the new system helps me work more efficiently and I can complete my tasks without constantly needing help..."></textarea>
+                    <h2 class="question-title">What would make this transition most successful for you personally?</h2>
+                    <p class="question-subtitle">Share any specific needs, concerns, or suggestions that would help ensure your success</p>
+                    
+                    <textarea class="text-input" placeholder="Please share your thoughts on what support, timing, or approach would help you feel confident and successful with the Vistex system transition..."></textarea>
                 </div>
 
-                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
-                    <button class="btn btn-secondary" aria-label="Save survey progress for later completion">Save Progress</button>
-                    <button class="btn" id="submit-survey" aria-label="Submit completed survey and view insights">Submit Survey</button>
+                <div class="survey-navigation">
+                    <button class="btn btn-secondary" id="prev-btn" style="display: none;">Previous</button>
+                    <button class="btn" id="next-btn">Next Question</button>
+                    <button class="btn" id="submit-btn" style="display: none;">Complete Assessment</button>
                 </div>
             </div>
         </div>
 
-        <!-- Insights Page -->
+        <!-- Insights Dashboard Page -->
         <div id="insights" class="page">
-            <h1 style="text-align: center; margin-bottom: 50px; font-size: 42px; font-weight: 300; letter-spacing: 2px;">
-                Behavioral Intelligence Dashboard
-            </h1>
-            
-            <div class="insights-dashboard">
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Confidence Level</h3>
-                        <span class="trend-indicator">↗ +18% from baseline</span>
-                    </div>
-                    <div class="card-value">3.4/5.0</div>
-                    <div class="chart-container">
-                        <div class="donut-chart">
-                            <div class="donut-value">68%</div>
-                        </div>
-                    </div>
-                    <div class="insight-text">
-                        "Moderate confidence detected. Implementation of peer support and hands-on training will accelerate adoption."
-                    </div>
+            <div class="intro-container">
+                <div class="hero-section">
+                    <div class="hero-badge">BEHAVIORAL INTELLIGENCE DASHBOARD</div>
+                    <h1 class="hero-title">Pre-UAT Assessment Insights</h1>
+                    <p class="hero-subtitle">Real-time analysis of team readiness, concerns, and learning preferences to optimize UAT design</p>
                 </div>
 
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Risk Indicators</h3>
-                        <span class="trend-indicator">Real-time analysis</span>
-                    </div>
-                    <div class="chart-container">
-                        <div class="bar-chart">
-                            <div class="bar" style="height: 85%; width: 50px;" title="Training Support (71%)"></div>
-                            <div class="bar" style="height: 68%; width: 50px;" title="Complexity Concerns (56%)"></div>
-                            <div class="bar" style="height: 42%; width: 50px;" title="Time Impact (35%)"></div>
-                            <div class="bar" style="height: 28%; width: 50px;" title="Error Anxiety (23%)"></div>
+                <div class="insights-dashboard">
+                    <div class="insight-card">
+                        <div class="card-header">
+                            <h3 style="color: #ffffff; font-size: 18px; font-weight: 500;">Team Confidence Level</h3>
+                            <span class="trend-indicator">↗ +12% vs baseline</span>
                         </div>
-                    </div>
-                    <ul class="action-items">
-                        <li class="action-item">Deploy buddy mentorship program</li>
-                        <li class="action-item">Create simplified workflow guides</li>
-                        <li class="action-item">Schedule micro-learning sessions</li>
-                        <li class="action-item">Implement error-safe practice environment</li>
-                    </ul>
-                </div>
-
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Learning Preferences</h3>
-                        <span class="trend-indicator">53 responses analyzed</span>
-                    </div>
-                    <div style="margin: 25px 0;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center;">
-                            <span style="color: #ccc;">Hands-on Practice</span>
-                            <span style="color: #64ffda; font-weight: 600;">76%</span>
-                        </div>
-                        <div style="width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px; margin-bottom: 20px;">
-                            <div style="width: 76%; height: 100%; background: linear-gradient(90deg, #64ffda, #00bfa5); border-radius: 4px;"></div>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center;">
-                            <span style="color: #ccc;">Peer Collaboration</span>
-                            <span style="color: #64ffda; font-weight: 600;">62%</span>
-                        </div>
-                        <div style="width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px; margin-bottom: 20px;">
-                            <div style="width: 62%; height: 100%; background: linear-gradient(90deg, #64ffda, #00bfa5); border-radius: 4px;"></div>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center;">
-                            <span style="color: #ccc;">Written Documentation</span>
-                            <span style="color: #64ffda; font-weight: 600;">45%</span>
-                        </div>
-                        <div style="width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px;">
-                            <div style="width: 45%; height: 100%; background: linear-gradient(90deg, #64ffda, #00bfa5); border-radius: 4px;"></div>
-                        </div>
-                    </div>
-                    <div class="insight-text">
-                        "Strong preference for experiential learning. Design training around real-world scenarios and peer interaction."
-                    </div>
-                </div>
-
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Behavioral Predictions</h3>
-                        <span class="trend-indicator">AI-powered analysis</span>
-                    </div>
-                    <div class="card-value">82%</div>
-                    <p style="color: #888; margin-bottom: 25px;">Predicted successful adoption rate</p>
-                    
-                    <div style="background: rgba(74, 222, 128, 0.08); border-left: 4px solid #4ade80; padding: 20px; border-radius: 0 12px 12px 0; margin: 20px 0;">
-                        <strong style="color: #4ade80;">Success Accelerators:</strong>
-                        <ul style="margin-top: 12px; padding-left: 20px; color: #ccc;">
-                            <li>Strong peer support network identified</li>
-                            <li>High engagement with hands-on learning</li>
-                            <li>Leadership commitment visible to teams</li>
-                            <li>Clear value proposition communicated</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(251, 113, 113, 0.08); border-left: 4px solid #f87171; padding: 20px; border-radius: 0 12px 12px 0;">
-                        <strong style="color: #f87171;">Risk Mitigation Required:</strong>
-                        <ul style="margin-top: 12px; padding-left: 20px; color: #ccc;">
-                            <li>Address training adequacy concerns</li>
-                            <li>Simplify initial user experience</li>
-                            <li>Create psychological safety for errors</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Engagement Metrics</h3>
-                        <span class="trend-indicator">Updated 1 hour ago</span>
-                    </div>
-                    
-                    <div class="metric-grid">
-                        <div class="metric-item">
-                            <div class="metric-value">53</div>
-                            <div class="metric-label">Survey Responses</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-value">94%</div>
-                            <div class="metric-label">Response Rate</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-value">22</div>
-                            <div class="metric-label">Champions Identified</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="metric-value">87%</div>
-                            <div class="metric-label">Engagement Score</div>
-                        </div>
-                    </div>
-
-                    <ul class="action-items">
-                        <li class="action-item">Launch champion network this week</li>
-                        <li class="action-item">Deploy scenario-based training modules</li>
-                        <li class="action-item">Implement real-time support system</li>
-                        <li class="action-item">Schedule stakeholder confidence check-ins</li>
-                    </ul>
-                </div>
-
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Sentiment Analysis</h3>
-                        <span class="trend-indicator">Natural Language Processing</span>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <div class="sentiment-container">
-                            <div class="sentiment-item sentiment-positive">
-                                <div class="sentiment-emoji">😊</div>
-                                <div style="font-size: 20px; font-weight: 600; color: #4ade80; margin-bottom: 5px;">42%</div>
-                                <div style="font-size: 12px; color: #888; text-transform: uppercase;">Positive</div>
-                            </div>
-                            <div class="sentiment-item sentiment-neutral">
-                                <div class="sentiment-emoji">😐</div>
-                                <div style="font-size: 20px; font-weight: 600; color: #9ca3af; margin-bottom: 5px;">41%</div>
-                                <div style="font-size: 12px; color: #888; text-transform: uppercase;">Neutral</div>
-                            </div>
-                            <div class="sentiment-item sentiment-negative">
-                                <div class="sentiment-emoji">😟</div>
-                                <div style="font-size: 20px; font-weight: 600; color: #f87171; margin-bottom: 5px;">17%</div>
-                                <div style="font-size: 12px; color: #888; text-transform: uppercase;">Concerned</div>
+                        <div class="card-value">3.2/5</div>
+                        <div class="chart-container">
+                            <div class="donut-chart">
+                                <div class="donut-value">64%</div>
                             </div>
                         </div>
+                        <div class="insight-text">
+                            "Moderate confidence suggests need for structured support during UAT. Focus on building competence through practice."
+                        </div>
                     </div>
-                    
-                    <div class="insight-text">
-                        "Overall sentiment trending positive. Focus support efforts on the 17% showing concern to maximize adoption success."
+
+                    <div class="insight-card">
+                        <div class="card-header">
+                            <h3 style="color: #ffffff; font-size: 18px; font-weight: 500;">Top Concerns</h3>
+                            <span class="trend-indicator">3 critical areas identified</span>
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <span style="color: #aaa;">Time to learn</span>
+                                <span style="color: #64ffda; font-weight: 600;">67%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <span style="color: #aaa;">System complexity</span>
+                                <span style="color: #64ffda; font-weight: 600;">52%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <span style="color: #aaa;">Adequate support</span>
+                                <span style="color: #64ffda; font-weight: 600;">44%</span>
+                            </div>
+                        </div>
+                        <div class="insight-text">
+                            "Address time concerns with micro-learning approach. Simplify complex workflows during initial UAT phases."
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="card-header">
+                            <h3 style="color: #ffffff; font-size: 18px; font-weight: 500;">Preferred Learning Styles</h3>
+                            <span class="trend-indicator">Hands-on dominates</span>
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <span style="color: #aaa;">Hands-on practice</span>
+                                <span style="color: #64ffda; font-weight: 600;">78%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <span style="color: #aaa;">Peer learning</span>
+                                <span style="color: #64ffda; font-weight: 600;">61%</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                <span style="color: #aaa;">Written docs</span>
+                                <span style="color: #64ffda; font-weight: 600;">39%</span>
+                            </div>
+                        </div>
+                        <div class="insight-text">
+                            "Design UAT with extensive hands-on scenarios. Include collaborative testing sessions for peer support."
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="card-header">
+                            <h3 style="color: #ffffff; font-size: 18px; font-weight: 500;">Success Predictions</h3>
+                            <span class="trend-indicator">AI-powered forecast</span>
+                        </div>
+                        <div class="card-value">82%</div>
+                        <div style="margin: 20px 0; color: #aaa; font-size: 14px;">
+                            <div style="margin-bottom: 10px;">📈 High adoption likelihood: 34% of team</div>
+                            <div style="margin-bottom: 10px;">⚠️ Moderate risk: 48% of team</div>
+                            <div style="margin-bottom: 10px;">🔥 Requires intervention: 18% of team</div>
+                        </div>
+                        <div class="insight-text">
+                            "Strong success prediction with targeted interventions for at-risk segments. Focus extra support on 18% high-risk group."
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="card-header">
+                            <h3 style="color: #ffffff; font-size: 18px; font-weight: 500;">Recommended UAT Strategy</h3>
+                            <span style="color: #4ade80; font-size: 12px;">Optimized approach</span>
+                        </div>
+                        <div style="margin: 20px 0; color: #ddd; font-size: 14px; line-height: 1.6;">
+                            <div style="margin-bottom: 15px; padding: 12px; background: rgba(100,255,218,0.05); border-radius: 8px; border-left: 3px solid #64ffda;">
+                                <strong style="color: #64ffda;">Phase 1:</strong> Hands-on orientation sessions with peer buddying
+                            </div>
+                            <div style="margin-bottom: 15px; padding: 12px; background: rgba(100,255,218,0.05); border-radius: 8px; border-left: 3px solid #64ffda;">
+                                <strong style="color: #64ffda;">Phase 2:</strong> Guided practice with simplified workflows
+                            </div>
+                            <div style="margin-bottom: 15px; padding: 12px; background: rgba(100,255,218,0.05); border-radius: 8px; border-left: 3px solid #64ffda;">
+                                <strong style="color: #64ffda;">Phase 3:</strong> Independent testing with on-demand support
+                            </div>
+                        </div>
+                        <div class="insight-text">
+                            "This 3-phase approach addresses top concerns while leveraging preferred learning styles for optimal engagement."
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <div class="card-header">
+                            <h3 style="color: #ffffff; font-size: 18px; font-weight: 500;">Key Interventions</h3>
+                            <span style="color: #4ade80; font-size: 12px;">Action items</span>
+                        </div>
+                        <div style="margin: 20px 0; color: #ddd; font-size: 14px; line-height: 1.6;">
+                            <div style="margin-bottom: 12px;">🎯 <strong>Time Management:</strong> 15-minute focused UAT sessions</div>
+                            <div style="margin-bottom: 12px;">🤝 <strong>Peer Support:</strong> Buddy system for collaborative learning</div>
+                            <div style="margin-bottom: 12px;">📚 <strong>Just-in-Time Help:</strong> Context-sensitive support during testing</div>
+                            <div style="margin-bottom: 12px;">🔄 <strong>Feedback Loops:</strong> Daily check-ins during UAT week</div>
+                            <div style="margin-bottom: 12px;">🏆 <strong>Quick Wins:</strong> Start with easiest workflows for confidence building</div>
+                        </div>
+                        <div class="insight-text">
+                            "These interventions directly address the 67% time concern and 52% complexity worry identified in the assessment."
+                        </div>
                     </div>
                 </div>
 
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Change Readiness Score</h3>
-                        <span class="trend-indicator">↗ Improving weekly</span>
-                    </div>
-                    <div class="card-value">7.2/10</div>
-                    
-                    <div style="margin: 25px 0;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                            <span style="color: #ccc; font-size: 14px;">Capability Readiness</span>
-                            <span style="color: #64ffda; font-weight: 600;">8.1</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                            <span style="color: #ccc; font-size: 14px;">Motivation Level</span>
-                            <span style="color: #64ffda; font-weight: 600;">6.8</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                            <span style="color: #ccc; font-size: 14px;">Opportunity Awareness</span>
-                            <span style="color: #64ffda; font-weight: 600;">6.7</span>
-                        </div>
-                    </div>
-                    
-                    <div style="background: rgba(100,255,218,0.08); border-left: 4px solid #64ffda; padding: 20px; border-radius: 0 12px 12px 0; margin: 20px 0;">
-                        <strong style="color: #64ffda;">Recommended Focus:</strong>
-                        <p style="margin-top: 10px; color: #ccc; font-size: 14px;">
-                            Increase motivation through clear benefit communication and enhance opportunity awareness via success story sharing.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="insight-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Implementation Roadmap</h3>
-                        <span class="trend-indicator">Data-driven recommendations</span>
-                    </div>
-                    
-                    <div style="margin: 25px 0;">
-                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #64ffda;">
-                            <div style="font-weight: 600; color: #64ffda; margin-bottom: 8px;">Week 1-2: Foundation</div>
-                            <div style="font-size: 14px; color: #ccc;">Launch champion network, deploy buddy system, begin hands-on training modules</div>
-                        </div>
-                        
-                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #888;">
-                            <div style="font-weight: 600; color: #888; margin-bottom: 8px;">Week 3-4: Acceleration</div>
-                            <div style="font-size: 14px; color: #ccc;">Intensive scenario practice, peer collaboration sessions, confidence building workshops</div>
-                        </div>
-                        
-                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; border-left: 4px solid #666;">
-                            <div style="font-weight: 600; color: #666; margin-bottom: 8px;">Week 5-6: Go-Live Preparation</div>
-                            <div style="font-size: 14px; color: #ccc;">Final readiness checks, support system activation, celebration planning</div>
-                        </div>
-                    </div>
-                    
-                    <div class="insight-text">
-                        "Timeline optimized based on learning preferences and confidence patterns. 82% predicted success rate."
+                <div class="cta-section" style="margin-top: 50px;">
+                    <h2 class="cta-title">Ready to Launch Optimized UAT?</h2>
+                    <p class="cta-desc">With these behavioral insights, we can now design a UAT experience that addresses specific concerns and leverages preferred learning styles for maximum success.</p>
+                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        <a href="#" class="btn">Download UAT Strategy</a>
+                        <a href="#" class="btn btn-secondary">Schedule Planning Session</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>Kandha Human-Centered Change Management Platform | Powered by Behavioral Science & AI Analytics</p>
+            <p>&copy; 2024 Kandha OCM Intelligence Platform. Powered by behavioral science and AI-driven insights.</p>
         </div>
     </div>
 
     <script>
-        // Global variables
-        let currentStep = 1;
-        const totalSteps = 4;
-        let simulationTimer;
-        let surveyData = {}; // In-memory storage instead of localStorage
+        // Survey data storage
+        let surveyData = {
+            confidence: null,
+            concerns: [],
+            learningStyles: [],
+            comments: ''
+        };
 
-        // Initialize event listeners when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeEventListeners();
-            startRealTimeSimulation();
+        let currentQuestion = 1;
+        const totalQuestions = 4;
+
+        // Navigation functionality
+        document.getElementById('intro-nav').addEventListener('click', () => showPage('intro'));
+        document.getElementById('survey-nav').addEventListener('click', () => showPage('survey'));
+        document.getElementById('insights-nav').addEventListener('click', () => showPage('insights'));
+        document.getElementById('start-assessment').addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('survey');
         });
-
-        function initializeEventListeners() {
-            // Navigation event listeners
-            document.getElementById('survey-nav').addEventListener('click', function() {
-                showPage('survey');
-            });
-            document.getElementById('survey-nav').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') showPage('survey');
-            });
-
-            document.getElementById('insights-nav').addEventListener('click', function() {
-                showPage('insights');
-            });
-            document.getElementById('insights-nav').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') showPage('insights');
-            });
-
-            // Scale point event listeners
-            document.querySelectorAll('.scale-point').forEach(point => {
-                point.addEventListener('click', function() {
-                    selectScale(this, this.getAttribute('data-value'));
-                });
-                point.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        selectScale(this, this.getAttribute('data-value'));
-                    }
-                });
-            });
-
-            // Checkbox event listeners
-            document.querySelectorAll('.checkbox-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    toggleCheckbox(this);
-                });
-                item.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        toggleCheckbox(this);
-                    }
-                });
-            });
-
-            // Submit button event listener
-            document.getElementById('submit-survey').addEventListener('click', function() {
-                submitSurvey();
-            });
-
-            // Save progress button
-            document.querySelector('.btn-secondary').addEventListener('click', function() {
-                saveProgress();
-            });
-
-            // Text input event listener
-            document.querySelector('.text-input').addEventListener('input', function() {
-                updateProgress();
-                saveProgress(); // Auto-save on text change
-            });
-
-            // Card hover effects
-            document.querySelectorAll('.insight-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Add print button to insights page
-            const printBtn = document.createElement('button');
-            printBtn.className = 'btn';
-            printBtn.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;';
-            printBtn.textContent = '📄 Export PDF';
-            printBtn.onclick = () => window.print();
-            document.body.appendChild(printBtn);
-
-            // Show print button only on insights page
-            const observer = new MutationObserver(() => {
-                const insightsActive = document.getElementById('insights').classList.contains('active');
-                printBtn.style.display = insightsActive ? 'block' : 'none';
-            });
-            observer.observe(document.getElementById('insights'), { attributes: true });
-        }
-
-        function saveProgress() {
-            // Save to in-memory object instead of localStorage
-            surveyData = {
-                confidence: document.querySelector('.scale-point.selected')?.getAttribute('data-value') || '',
-                concerns: Array.from(document.querySelectorAll('.checkbox-item.selected')).map(item => item.textContent.trim()),
-                textResponse: document.querySelector('.text-input').value,
-                timestamp: new Date().toISOString()
-            };
-            
-            // Show save confirmation
-            showNotification('💾 Progress saved in session!', '#64ffda');
-        }
-
-        function startRealTimeSimulation() {
-            // Simulate real-time data updates every 30 seconds
-            simulationTimer = setInterval(() => {
-                if (document.getElementById('insights').classList.contains('active')) {
-                    updateRealTimeData();
-                }
-            }, 30000);
-        }
-
-        function updateRealTimeData() {
-            // Simulate new survey responses
-            const responseCount = document.querySelector('.metric-value');
-            if (responseCount && responseCount.textContent !== '94%') {
-                const currentCount = parseInt(responseCount.textContent);
-                const newCount = currentCount + Math.floor(Math.random() * 3) + 1;
-                responseCount.textContent = newCount.toString();
-            }
-
-            // Update timestamp
-            document.querySelectorAll('.trend-indicator').forEach(indicator => {
-                if (indicator.textContent.includes('Updated')) {
-                    const minutes = Math.floor(Math.random() * 15) + 1;
-                    indicator.textContent = `Updated ${minutes} minutes ago`;
-                }
-            });
-
-            // Subtle confidence level changes
-            const confidenceValue = document.querySelector('.card-value');
-            if (confidenceValue && confidenceValue.textContent.includes('/5.0')) {
-                const values = [3.2, 3.3, 3.4, 3.5];
-                const randomValue = values[Math.floor(Math.random() * values.length)];
-                confidenceValue.textContent = `${randomValue}/5.0`;
-            }
-
-            showNotification('🔄 Data refreshed', '#64ffda');
-        }
-
-        function showNotification(message, color = '#64ffda') {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 20px;
-                background: ${color};
-                color: #000;
-                padding: 12px 20px;
-                border-radius: 8px;
-                font-weight: 600;
-                z-index: 1001;
-                font-size: 14px;
-                animation: slideInLeft 0.3s ease-out;
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-
-            // Add animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideInLeft {
-                    from { transform: translateX(-100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-
-            setTimeout(() => {
-                notification.remove();
-                style.remove();
-            }, 3000);
-        }
 
         function showPage(pageId) {
             // Hide all pages
@@ -1233,116 +1137,120 @@
                 page.classList.remove('active');
             });
             
-            // Remove active class from all nav items
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
             // Show selected page
             document.getElementById(pageId).classList.add('active');
             
-            // Add active class to corresponding nav item
-            if (pageId === 'survey') {
-                document.getElementById('survey-nav').classList.add('active');
-            } else if (pageId === 'insights') {
-                document.getElementById('insights-nav').classList.add('active');
-            }
-
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function selectScale(element, value) {
-            // Remove selection from all scale points
-            document.querySelectorAll('.scale-point').forEach(point => {
-                point.classList.remove('selected');
+            // Update navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
             });
-            
-            // Add selection to clicked point
-            element.classList.add('selected');
-            updateProgress();
+            document.getElementById(pageId + '-nav').classList.add('active');
         }
 
-        function toggleCheckbox(element) {
-            const parentGroup = element.parentElement;
-            const selectedCount = parentGroup.querySelectorAll('.selected').length;
-            
-            if (!element.classList.contains('selected')) {
-                if (selectedCount < 2) {
-                    element.classList.add('selected');
-                }
-            } else {
-                element.classList.remove('selected');
-            }
-            
-            updateProgress();
-        }
-
+        // Survey functionality
         function updateProgress() {
-            const interactions = document.querySelectorAll('.selected').length;
-            const textInput = document.querySelector('.text-input').value.length;
-            
-            let progress = 0;
-            if (interactions > 0) progress += 60;
-            if (textInput > 20) progress += 40;
-            
-            progress = Math.min(progress, 100);
-            
+            const progress = (currentQuestion / totalQuestions) * 100;
             document.querySelector('.progress-fill').style.width = progress + '%';
-            
-            // Update step indicator
-            const stepIndicator = Math.min(Math.floor(progress / 25) + 1, totalSteps);
-            document.querySelector('.progress-text').textContent = `${stepIndicator} of ${totalSteps}`;
+            document.querySelector('.progress-text').textContent = `${currentQuestion} of ${totalQuestions}`;
         }
 
-        function submitSurvey() {
-            // Add submission animation
-            const btn = document.getElementById('submit-survey');
-            btn.style.transform = 'scale(0.95)';
-            btn.textContent = 'Processing...';
-            
-            setTimeout(() => {
-                // Show success message
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: linear-gradient(135deg, #4ade80, #22c55e);
-                    color: #000;
-                    padding: 20px 30px;
-                    border-radius: 12px;
-                    font-weight: 600;
-                    z-index: 1000;
-                    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
-                    animation: slideIn 0.5s ease-out;
-                `;
-                notification.textContent = '✓ Survey submitted! Generating insights...';
-                document.body.appendChild(notification);
+        // Scale selection (Question 1)
+        document.querySelectorAll('.scale-point').forEach(point => {
+            point.addEventListener('click', function() {
+                document.querySelectorAll('.scale-point').forEach(p => p.classList.remove('selected'));
+                this.classList.add('selected');
+                surveyData.confidence = parseInt(this.dataset.value);
+            });
+        });
+
+        // Checkbox selection (Questions 2 & 3)
+        document.querySelectorAll('.checkbox-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const question = this.closest('.question');
+                const questionNum = parseInt(question.querySelector('.question-number').textContent);
                 
-                // Add slide-in animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes slideIn {
-                        from { transform: translateX(100%); opacity: 0; }
-                        to { transform: translateX(0); opacity: 1; }
+                if (questionNum === 2) {
+                    // Question 2: Max 2 selections
+                    const selectedCount = question.querySelectorAll('.checkbox-item.selected').length;
+                    
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        const index = surveyData.concerns.indexOf(this.textContent.trim());
+                        if (index > -1) surveyData.concerns.splice(index, 1);
+                    } else if (selectedCount < 2) {
+                        this.classList.add('selected');
+                        surveyData.concerns.push(this.textContent.trim());
                     }
-                `;
-                document.head.appendChild(style);
+                } else if (questionNum === 3) {
+                    // Question 3: Max 2 selections
+                    const selectedCount = question.querySelectorAll('.checkbox-item.selected').length;
+                    
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        const index = surveyData.learningStyles.indexOf(this.textContent.trim());
+                        if (index > -1) surveyData.learningStyles.splice(index, 1);
+                    } else if (selectedCount < 2) {
+                        this.classList.add('selected');
+                        surveyData.learningStyles.push(this.textContent.trim());
+                    }
+                }
+            });
+        });
+
+        // Text input (Question 4)
+        document.querySelector('.text-input').addEventListener('input', function() {
+            surveyData.comments = this.value;
+        });
+
+        // Navigation buttons
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                updateProgress();
                 
-                setTimeout(() => {
-                    // Switch to insights page
-                    showPage('insights');
-                    
-                    // Remove notification
-                    notification.remove();
-                    
-                    // Reset button
-                    btn.style.transform = '';
-                    btn.textContent = 'Submit Survey';
-                }, 2000);
-            }, 1000);
-        }
+                if (currentQuestion === totalQuestions) {
+                    document.getElementById('next-btn').style.display = 'none';
+                    document.getElementById('submit-btn').style.display = 'inline-block';
+                }
+                
+                document.getElementById('prev-btn').style.display = 'inline-block';
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                updateProgress();
+                
+                if (currentQuestion === 1) {
+                    document.getElementById('prev-btn').style.display = 'none';
+                }
+                
+                if (currentQuestion < totalQuestions) {
+                    document.getElementById('next-btn').style.display = 'inline-block';
+                    document.getElementById('submit-btn').style.display = 'none';
+                }
+            }
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            console.log('Survey Data:', surveyData);
+            alert('Assessment completed! Thank you for your insights. Redirecting to insights dashboard...');
+            showPage('insights');
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.classList.contains('scale-point') || e.target.classList.contains('checkbox-item')) {
+                    e.preventDefault();
+                    e.target.click();
+                }
+            }
+        });
+
+        // Initialize
+        updateProgress();
     </script>
 </body>
 </html>
