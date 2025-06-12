@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kandha OCM Intelligence Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid #2a2a2a;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 300;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        .logo-accent {
+            color: #64ffda;
+            font-weight: 600;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        /* Accessibility improvements */
+        .nav-item {
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #aaa; /* Improved contrast from #888 */
+        }
+
+        .survey-subtitle {
+            font-size: 16px;
+            color: #aaa; /* Improved contrast from #888 */
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .question-subtitle {
+            font-size: 14px;
+            color: #aaa; /* Improved contrast from #888 */
+            margin-bottom: 30px;
+        }
+
+        .scale-label {
+            font-size: 12px;
+            color: #aaa; /* Improved contrast from #888 */
+            text-align: center;
+            max-width: 90px;
+            line-height: 1.3;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #aaa; /* Improved contrast from #888 */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Print styles for PDF export */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .header, .footer, .nav {
+                display: none !important;
+            }
+            
+            .page:not(.active) {
+                display: none !important;
+            }
+            
+            .insight-card {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+            
+            .insights-dashboard {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 15px !important;
+            }
+            
+            .card-title, .card-value {
+                color: black !important;
+            }
+            
+            .insight-text {
+                background: #f5f5f5 !important;
+                border-left: 4px solid #64ffda !important;
+                color: black !important;
+            }
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-item.active {
+            background: #64ffda;
+            color: #000000;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .survey-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 50px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .survey-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .survey-subtitle {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: #2a2a2a;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #64ffda, #00bfa5);
+            width: 25%;
+            transition: width 0.4s ease;
+            border-radius: 3px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #64ffda;
+            font-weight: 500;
+        }
+
+        .question {
+            margin-bottom: 50px;
+        }
+
+        .question-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #64ffda;
+            color: #000;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .question-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .scale-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.01);
+            border-radius: 12px;
+        }
+
+        .scale-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .scale-point:hover {
+            background: rgba(100,255,218,0.05);
+        }
+
+        .scale-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .scale-point:hover .scale-circle,
+        .scale-point.selected .scale-circle {
+            border-color: #64ffda;
+            background: rgba(100,255,218,0.1);
+            color: #64ffda;
+            transform: scale(1.05);
+        }
+
+        .scale-label {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            max-width: 90px;
+            line-height: 1.3;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: #444;
+            transform: translateY(-2px);
+        }
+
+        .checkbox-item.selected {
+            background: rgba(100,255,218,0.08);
+            border-color: #64ffda;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #444;
+            border-radius: 6px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item.selected .checkbox {
+            border-color: #64ffda;
+            background: #64ffda;
+        }
+
+        .checkbox-item.selected .checkbox::after {
+            content: '✓';
+            color: #000;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #64ffda;
+            background: rgba(255,255,255,0.04);
+            box-shadow: 0 0 0 3px rgba(100,255,218,0.1);
+        }
+
+        .text-input::placeholder {
+            color: #666;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #64ffda, #00bfa5);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(100,255,218,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid #444;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            border-color: #64ffda;
+            background: rgba(100,255,218,0.1);
+            box-shadow: none;
+        }
+
+        .insights-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .insight-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 35px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64ffda, #00bfa5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-8px);
+            border-color: #444;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .insight-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .card-value {
+            font-size: 38px;
+            font-weight: 300;
+            color: #64ffda;
+            margin-bottom: 10px;
+        }
+
+        .trend-indicator {
+            font-size: 14px;
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .trend-indicator.down {
+            color: #f87171;
+        }
+
+        .chart-container {
+            height: 220px;
+            background: rgba(255,255,255,0.01);
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 1px solid #1a1a1a;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: end;
+            height: 160px;
+            gap: 15px;
+            padding: 25px;
+        }
+
+        .bar {
+            background: linear-gradient(to top, #64ffda, #00bfa5);
+            border-radius: 6px 6px 0 0;
+            min-width: 35px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .bar:hover {
+            opacity: 1;
+            transform: scaleY(1.05);
+        }
+
+        .donut-chart {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #64ffda 0deg 230deg,
+                #2a2a2a 230deg 360deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .donut-chart::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: #1a1a1a;
+            border-radius: 50%;
+        }
+
+        .donut-value {
+            position: absolute;
+            font-size: 20px;
+            font-weight: 600;
+            color: #64ffda;
+        }
+
+        .action-items {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .action-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-item::before {
+            content: '→';
+            color: #64ffda;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .insight-text {
+            background: rgba(100,255,218,0.08);
+            border-left: 4px solid #64ffda;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #64ffda;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sentiment-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .sentiment-item {
+            text-align: center;
+        }
+
+        .sentiment-emoji {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            border: 3px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .sentiment-item:hover .sentiment-emoji {
+            transform: scale(1.1);
+        }
+
+        .sentiment-positive .sentiment-emoji {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: #4ade80;
+        }
+
+        .sentiment-neutral .sentiment-emoji {
+            background: rgba(156, 163, 175, 0.1);
+            border-color: #9ca3af;
+        }
+
+        .sentiment-negative .sentiment-emoji {
+            background: rgba(251, 113, 113, 0.1);
+            border-color: #f87171;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 0;
+            border-top: 1px solid #2a2a2a;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .scale-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .insights-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .survey-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">KANDHA <span class="logo-accent">OCM</span></div>
+            <div class="nav">
+                <div class="nav-item active" id="survey-nav" role="button" tabindex="0" aria-label="Switch to pulse survey">Pulse Survey</div>
+                <div class="nav-item" id="insights-nav" role="button" tabindex="0" aria-label="Switch to live insights dashboard">Live Insights</div>
+            </div>
+        </div>
+
+        <!-- Survey Page -->
+        <div id="survey" class="page active">
+            <div class="survey-container">
+                <div class="survey-header">
+                    <h1 class="survey-title">Solenis Implementation Pulse</h1>
+                    <p class="survey-subtitle">Your insights help us create a personalized change experience that ensures your success</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">1 of 4</div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">1</div>
+                    <h2 class="question-title">How confident do you feel about using the new Solenis system?</h2>
+                    <p class="question-subtitle">Your honest assessment helps us provide the right level of support</p>
+                    
+                    <div class="scale-container">
+                        <div class="scale-point" data-value="1" role="button" tabindex="0" aria-label="Rate confidence as 1 - Very concerned">
+                            <div class="scale-circle">1</div>
+                            <div class="scale-label">Very concerned</div>
+                        </div>
+                        <div class="scale-point" data-value="2" role="button" tabindex="0" aria-label="Rate confidence as 2 - Somewhat concerned">
+                            <div class="scale-circle">2</div>
+                            <div class="scale-label">Somewhat concerned</div>
+                        </div>
+                        <div class="scale-point" data-value="3" role="button" tabindex="0" aria-label="Rate confidence as 3 - Neutral">
+                            <div class="scale-circle">3</div>
+                            <div class="scale-label">Neutral</div>
+                        </div>
+                        <div class="scale-point" data-value="4" role="button" tabindex="0" aria-label="Rate confidence as 4 - Somewhat confident">
+                            <div class="scale-circle">4</div>
+                            <div class="scale-label">Somewhat confident</div>
+                        </div>
+                        <div class="scale-point" data-value="5" role="button" tabindex="0" aria-label="Rate confidence as 5 - Very confident">
+                            <div class="scale-circle">5</div>
+                            <div class="scale-label">Very confident</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">2</div>
+                    <h2 class="question-title">What are your biggest concerns about the upcoming changes?</h2>
+                    <p class="question-subtitle">Select up to 2 that resonate most with you</p>
+                    
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Learning new processes will take too long</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>System will be more complicated than current process</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Won't get enough training/support</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>It will slow down my daily work initially</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Worried about making mistakes</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Not sure how this benefits my role</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">3</div>
+                    <h2 class="question-title">How would you prefer to learn the new system?</h2>
+                    <p class="question-subtitle">Select your top 2 preferences</p>
+                    
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Hands-on practice with real scenarios</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Step-by-step written guides</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>One-on-one coaching support</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Learning alongside a colleague</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Video tutorials I can replay</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <div class="checkbox"></div>
+                            <span>Trial and error with good help available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">4</div>
+                    <h2 class="question-title">What would make you feel successful with this change?</h2>
+                    <p class="question-subtitle">Share your ideal outcome in your own words</p>
+                    <textarea class="text-input" placeholder="I would feel successful when the new system helps me work more efficiently and I can complete my tasks without constantly needing help..."></textarea>
+                </div>
+
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
+                    <button class="btn btn-secondary" aria-label="Save survey progress for later completion">Save Progress</button>
+                    <button class="btn" id="submit-survey" aria-label="Submit completed survey and view insights">Submit Survey</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Page -->
+        <div id="insights" class="page">
+            <h1 style="text-align: center; margin-bottom: 50px; font-size: 42px; font-weight: 300; letter-spacing: 2px;">
+                Behavioral Intelligence Dashboard
+            </h1>
+            
+            <div class="insights-dashboard">
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Confidence Level</h3>
+                        <span class="trend-indicator">↗ +18% from baseline</span>
+                    </div>
+                    <div class="card-value">3.4/5.0</div>
+                    <div class="chart-container">
+                        <div class="donut-chart">
+                            <div class="donut-value">68%</div>
+                        </div>
+                    </div>
+                    <div class="insight-text">
+                        "Moderate confidence detected. Implementation of peer support and hands-on training will accelerate adoption."
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Risk Indicators</h3>
+                        <span class="trend-indicator">Real-time analysis</span>
+                    </div>
+                    <div class="chart-container">
+                        <div class="bar-chart">
+                            <div class="bar" style="height: 85%; width: 50px;" title="Training Support (71%)"></div>
+                            <div class="bar" style="height: 68%; width: 50px;" title="Complexity Concerns (56%)"></div>
+                            <div class="bar" style="height: 42%; width: 50px;" title="Time Impact (35%)"></div>
+                            <div class="bar" style="height: 28%; width: 50px;" title="Error Anxiety (23%)"></div>
+                        </div>
+                    </div>
+                    <ul class="action-items">
+                        <li class="action-item">Deploy buddy mentorship program</li>
+                        <li class="action-item">Create simplified workflow guides</li>
+                        <li class="action-item">Schedule micro-learning sessions</li>
+                        <li class="action-item">Implement error-safe practice environment</li>
+                    </ul>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Learning Preferences</h3>
+                        <span class="trend-indicator">53 responses analyzed</span>
+                    </div>
+                    <div style="margin: 25px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center;">
+                            <span style="color: #ccc;">Hands-on Practice</span>
+                            <span style="color: #64ffda; font-weight: 600;">76%</span>
+                        </div>
+                        <div style="width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px; margin-bottom: 20px;">
+                            <div style="width: 76%; height: 100%; background: linear-gradient(90deg, #64ffda, #00bfa5); border-radius: 4px;"></div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center;">
+                            <span style="color: #ccc;">Peer Collaboration</span>
+                            <span style="color: #64ffda; font-weight: 600;">62%</span>
+                        </div>
+                        <div style="width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px; margin-bottom: 20px;">
+                            <div style="width: 62%; height: 100%; background: linear-gradient(90deg, #64ffda, #00bfa5); border-radius: 4px;"></div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; align-items: center;">
+                            <span style="color: #ccc;">Written Documentation</span>
+                            <span style="color: #64ffda; font-weight: 600;">45%</span>
+                        </div>
+                        <div style="width: 100%; height: 8px; background: #2a2a2a; border-radius: 4px;">
+                            <div style="width: 45%; height: 100%; background: linear-gradient(90deg, #64ffda, #00bfa5); border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div class="insight-text">
+                        "Strong preference for experiential learning. Design training around real-world scenarios and peer interaction."
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Behavioral Predictions</h3>
+                        <span class="trend-indicator">AI-powered analysis</span>
+                    </div>
+                    <div class="card-value">82%</div>
+                    <p style="color: #888; margin-bottom: 25px;">Predicted successful adoption rate</p>
+                    
+                    <div style="background: rgba(74, 222, 128, 0.08); border-left: 4px solid #4ade80; padding: 20px; border-radius: 0 12px 12px 0; margin: 20px 0;">
+                        <strong style="color: #4ade80;">Success Accelerators:</strong>
+                        <ul style="margin-top: 12px; padding-left: 20px; color: #ccc;">
+                            <li>Strong peer support network identified</li>
+                            <li>High engagement with hands-on learning</li>
+                            <li>Leadership commitment visible to teams</li>
+                            <li>Clear value proposition communicated</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(251, 113, 113, 0.08); border-left: 4px solid #f87171; padding: 20px; border-radius: 0 12px 12px 0;">
+                        <strong style="color: #f87171;">Risk Mitigation Required:</strong>
+                        <ul style="margin-top: 12px; padding-left: 20px; color: #ccc;">
+                            <li>Address training adequacy concerns</li>
+                            <li>Simplify initial user experience</li>
+                            <li>Create psychological safety for errors</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Engagement Metrics</h3>
+                        <span class="trend-indicator">Updated 1 hour ago</span>
+                    </div>
+                    
+                    <div class="metric-grid">
+                        <div class="metric-item">
+                            <div class="metric-value">53</div>
+                            <div class="metric-label">Survey Responses</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">94%</div>
+                            <div class="metric-label">Response Rate</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">22</div>
+                            <div class="metric-label">Champions Identified</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">87%</div>
+                            <div class="metric-label">Engagement Score</div>
+                        </div>
+                    </div>
+
+                    <ul class="action-items">
+                        <li class="action-item">Launch champion network this week</li>
+                        <li class="action-item">Deploy scenario-based training modules</li>
+                        <li class="action-item">Implement real-time support system</li>
+                        <li class="action-item">Schedule stakeholder confidence check-ins</li>
+                    </ul>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Sentiment Analysis</h3>
+                        <span class="trend-indicator">Natural Language Processing</span>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="sentiment-container">
+                            <div class="sentiment-item sentiment-positive">
+                                <div class="sentiment-emoji">😊</div>
+                                <div style="font-size: 20px; font-weight: 600; color: #4ade80; margin-bottom: 5px;">42%</div>
+                                <div style="font-size: 12px; color: #888; text-transform: uppercase;">Positive</div>
+                            </div>
+                            <div class="sentiment-item sentiment-neutral">
+                                <div class="sentiment-emoji">😐</div>
+                                <div style="font-size: 20px; font-weight: 600; color: #9ca3af; margin-bottom: 5px;">41%</div>
+                                <div style="font-size: 12px; color: #888; text-transform: uppercase;">Neutral</div>
+                            </div>
+                            <div class="sentiment-item sentiment-negative">
+                                <div class="sentiment-emoji">😟</div>
+                                <div style="font-size: 20px; font-weight: 600; color: #f87171; margin-bottom: 5px;">17%</div>
+                                <div style="font-size: 12px; color: #888; text-transform: uppercase;">Concerned</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-text">
+                        "Overall sentiment trending positive. Focus support efforts on the 17% showing concern to maximize adoption success."
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Change Readiness Score</h3>
+                        <span class="trend-indicator">↗ Improving weekly</span>
+                    </div>
+                    <div class="card-value">7.2/10</div>
+                    
+                    <div style="margin: 25px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #ccc; font-size: 14px;">Capability Readiness</span>
+                            <span style="color: #64ffda; font-weight: 600;">8.1</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #ccc; font-size: 14px;">Motivation Level</span>
+                            <span style="color: #64ffda; font-weight: 600;">6.8</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #ccc; font-size: 14px;">Opportunity Awareness</span>
+                            <span style="color: #64ffda; font-weight: 600;">6.7</span>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(100,255,218,0.08); border-left: 4px solid #64ffda; padding: 20px; border-radius: 0 12px 12px 0; margin: 20px 0;">
+                        <strong style="color: #64ffda;">Recommended Focus:</strong>
+                        <p style="margin-top: 10px; color: #ccc; font-size: 14px;">
+                            Increase motivation through clear benefit communication and enhance opportunity awareness via success story sharing.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Implementation Roadmap</h3>
+                        <span class="trend-indicator">Data-driven recommendations</span>
+                    </div>
+                    
+                    <div style="margin: 25px 0;">
+                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #64ffda;">
+                            <div style="font-weight: 600; color: #64ffda; margin-bottom: 8px;">Week 1-2: Foundation</div>
+                            <div style="font-size: 14px; color: #ccc;">Launch champion network, deploy buddy system, begin hands-on training modules</div>
+                        </div>
+                        
+                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #888;">
+                            <div style="font-weight: 600; color: #888; margin-bottom: 8px;">Week 3-4: Acceleration</div>
+                            <div style="font-size: 14px; color: #ccc;">Intensive scenario practice, peer collaboration sessions, confidence building workshops</div>
+                        </div>
+                        
+                        <div style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; border-left: 4px solid #666;">
+                            <div style="font-weight: 600; color: #666; margin-bottom: 8px;">Week 5-6: Go-Live Preparation</div>
+                            <div style="font-size: 14px; color: #ccc;">Final readiness checks, support system activation, celebration planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-text">
+                        "Timeline optimized based on learning preferences and confidence patterns. 82% predicted success rate."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Kandha Human-Centered Change Management Platform | Powered by Behavioral Science & AI Analytics</p>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentStep = 1;
+        const totalSteps = 4;
+        let simulationTimer;
+        let surveyData = {}; // In-memory storage instead of localStorage
+
+        // Initialize event listeners when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeEventListeners();
+            startRealTimeSimulation();
+        });
+
+        function initializeEventListeners() {
+            // Navigation event listeners
+            document.getElementById('survey-nav').addEventListener('click', function() {
+                showPage('survey');
+            });
+            document.getElementById('survey-nav').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') showPage('survey');
+            });
+
+            document.getElementById('insights-nav').addEventListener('click', function() {
+                showPage('insights');
+            });
+            document.getElementById('insights-nav').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') showPage('insights');
+            });
+
+            // Scale point event listeners
+            document.querySelectorAll('.scale-point').forEach(point => {
+                point.addEventListener('click', function() {
+                    selectScale(this, this.getAttribute('data-value'));
+                });
+                point.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        selectScale(this, this.getAttribute('data-value'));
+                    }
+                });
+            });
+
+            // Checkbox event listeners
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    toggleCheckbox(this);
+                });
+                item.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        toggleCheckbox(this);
+                    }
+                });
+            });
+
+            // Submit button event listener
+            document.getElementById('submit-survey').addEventListener('click', function() {
+                submitSurvey();
+            });
+
+            // Save progress button
+            document.querySelector('.btn-secondary').addEventListener('click', function() {
+                saveProgress();
+            });
+
+            // Text input event listener
+            document.querySelector('.text-input').addEventListener('input', function() {
+                updateProgress();
+                saveProgress(); // Auto-save on text change
+            });
+
+            // Card hover effects
+            document.querySelectorAll('.insight-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add print button to insights page
+            const printBtn = document.createElement('button');
+            printBtn.className = 'btn';
+            printBtn.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;';
+            printBtn.textContent = '📄 Export PDF';
+            printBtn.onclick = () => window.print();
+            document.body.appendChild(printBtn);
+
+            // Show print button only on insights page
+            const observer = new MutationObserver(() => {
+                const insightsActive = document.getElementById('insights').classList.contains('active');
+                printBtn.style.display = insightsActive ? 'block' : 'none';
+            });
+            observer.observe(document.getElementById('insights'), { attributes: true });
+        }
+
+        function saveProgress() {
+            // Save to in-memory object instead of localStorage
+            surveyData = {
+                confidence: document.querySelector('.scale-point.selected')?.getAttribute('data-value') || '',
+                concerns: Array.from(document.querySelectorAll('.checkbox-item.selected')).map(item => item.textContent.trim()),
+                textResponse: document.querySelector('.text-input').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Show save confirmation
+            showNotification('💾 Progress saved in session!', '#64ffda');
+        }
+
+        function startRealTimeSimulation() {
+            // Simulate real-time data updates every 30 seconds
+            simulationTimer = setInterval(() => {
+                if (document.getElementById('insights').classList.contains('active')) {
+                    updateRealTimeData();
+                }
+            }, 30000);
+        }
+
+        function updateRealTimeData() {
+            // Simulate new survey responses
+            const responseCount = document.querySelector('.metric-value');
+            if (responseCount && responseCount.textContent !== '94%') {
+                const currentCount = parseInt(responseCount.textContent);
+                const newCount = currentCount + Math.floor(Math.random() * 3) + 1;
+                responseCount.textContent = newCount.toString();
+            }
+
+            // Update timestamp
+            document.querySelectorAll('.trend-indicator').forEach(indicator => {
+                if (indicator.textContent.includes('Updated')) {
+                    const minutes = Math.floor(Math.random() * 15) + 1;
+                    indicator.textContent = `Updated ${minutes} minutes ago`;
+                }
+            });
+
+            // Subtle confidence level changes
+            const confidenceValue = document.querySelector('.card-value');
+            if (confidenceValue && confidenceValue.textContent.includes('/5.0')) {
+                const values = [3.2, 3.3, 3.4, 3.5];
+                const randomValue = values[Math.floor(Math.random() * values.length)];
+                confidenceValue.textContent = `${randomValue}/5.0`;
+            }
+
+            showNotification('🔄 Data refreshed', '#64ffda');
+        }
+
+        function showNotification(message, color = '#64ffda') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: ${color};
+                color: #000;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 1001;
+                font-size: 14px;
+                animation: slideInLeft 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInLeft {
+                    from { transform: translateX(-100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            setTimeout(() => {
+                notification.remove();
+                style.remove();
+            }, 3000);
+        }
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add active class to corresponding nav item
+            if (pageId === 'survey') {
+                document.getElementById('survey-nav').classList.add('active');
+            } else if (pageId === 'insights') {
+                document.getElementById('insights-nav').classList.add('active');
+            }
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectScale(element, value) {
+            // Remove selection from all scale points
+            document.querySelectorAll('.scale-point').forEach(point => {
+                point.classList.remove('selected');
+            });
+            
+            // Add selection to clicked point
+            element.classList.add('selected');
+            updateProgress();
+        }
+
+        function toggleCheckbox(element) {
+            const parentGroup = element.parentElement;
+            const selectedCount = parentGroup.querySelectorAll('.selected').length;
+            
+            if (!element.classList.contains('selected')) {
+                if (selectedCount < 2) {
+                    element.classList.add('selected');
+                }
+            } else {
+                element.classList.remove('selected');
+            }
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const interactions = document.querySelectorAll('.selected').length;
+            const textInput = document.querySelector('.text-input').value.length;
+            
+            let progress = 0;
+            if (interactions > 0) progress += 60;
+            if (textInput > 20) progress += 40;
+            
+            progress = Math.min(progress, 100);
+            
+            document.querySelector('.progress-fill').style.width = progress + '%';
+            
+            // Update step indicator
+            const stepIndicator = Math.min(Math.floor(progress / 25) + 1, totalSteps);
+            document.querySelector('.progress-text').textContent = `${stepIndicator} of ${totalSteps}`;
+        }
+
+        function submitSurvey() {
+            // Add submission animation
+            const btn = document.getElementById('submit-survey');
+            btn.style.transform = 'scale(0.95)';
+            btn.textContent = 'Processing...';
+            
+            setTimeout(() => {
+                // Show success message
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #4ade80, #22c55e);
+                    color: #000;
+                    padding: 20px 30px;
+                    border-radius: 12px;
+                    font-weight: 600;
+                    z-index: 1000;
+                    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+                    animation: slideIn 0.5s ease-out;
+                `;
+                notification.textContent = '✓ Survey submitted! Generating insights...';
+                document.body.appendChild(notification);
+                
+                // Add slide-in animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                setTimeout(() => {
+                    // Switch to insights page
+                    showPage('insights');
+                    
+                    // Remove notification
+                    notification.remove();
+                    
+                    // Reset button
+                    btn.style.transform = '';
+                    btn.textContent = 'Submit Survey';
+                }, 2000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
