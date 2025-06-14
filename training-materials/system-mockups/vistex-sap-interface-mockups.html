@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vistex RevFlow System Mockups</title>
+    <style>
+        body { font-family: 'Tahoma', Arial, sans-serif; margin: 0; padding: 20px; background: #1a1a1a; color: #ffffff; font-size: 11px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1c1c1c 0%, #3a3a3a 100%); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; text-align: center; }
+        .mockup-section { background: #2d2d2d; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); margin-bottom: 30px; overflow: hidden; border: 1px solid #444444; }
+        .mockup-header { background: #444444; color: white; padding: 20px; font-size: 1.2em; font-weight: bold; }
+        .browser-bar { background: #333333; padding: 10px 20px; border-bottom: 1px solid #555555; font-size: 0.9em; color: #cccccc; }
+        .system-interface { padding: 0; background: #f5f5f5; color: #000000; }
+        .sap-header { background: linear-gradient(to bottom, #4a90e2 0%, #357abd 50%, #1e5f99 100%); color: white; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; border-bottom: 1px solid #2c5aa0; }
+        .sap-logo { background: #ffffff; color: #4a90e2; padding: 2px 8px; border-radius: 3px; font-weight: bold; font-size: 11px; }
+        .user-info { font-size: 11px; color: #ffffff; }
+        .sap-tabs { background: #e6e6e6; border-bottom: 1px solid #cccccc; display: flex; padding: 0; margin: 0; }
+        .sap-tab { background: #f0f0f0; border: 1px solid #cccccc; border-bottom: none; padding: 8px 15px; margin-right: 2px; cursor: pointer; font-size: 11px; color: #000000; border-radius: 4px 4px 0 0; }
+        .sap-tab.active { background: #ffffff; border-bottom: 1px solid #ffffff; margin-bottom: -1px; font-weight: bold; }
+        .sap-content { background: #ffffff; padding: 15px; color: #000000; }
+        .sap-section { border: 1px solid #cccccc; margin-bottom: 15px; background: #f8f8f8; }
+        .sap-section-header { background: #e6e6e6; padding: 8px 12px; border-bottom: 1px solid #cccccc; font-weight: bold; font-size: 11px; }
+        .sap-section-content { padding: 12px; background: #ffffff; }
+        .sap-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
+        .sap-form-group { display: flex; flex-direction: column; }
+        .sap-form-group label { font-weight: normal; margin-bottom: 3px; color: #000000; font-size: 11px; }
+        .sap-form-group input, .sap-form-group select { padding: 3px 5px; border: 1px solid #cccccc; font-size: 11px; background: #ffffff; color: #000000; }
+        .sap-form-group input.highlight { background: #ffffcc; border: 1px solid #ffcc00; }
+        .sap-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 10px; }
+        .sap-table th { background: #e6e6e6; color: #000000; padding: 6px 8px; text-align: left; font-weight: bold; border: 1px solid #cccccc; font-size: 10px; }
+        .sap-table td { padding: 4px 8px; border: 1px solid #cccccc; background: #ffffff; font-size: 11px; }
+        .sap-table td.highlight { background: #ffffcc; }
+        .sap-button { background: #f0f0f0; border: 1px solid #999999; padding: 4px 12px; font-size: 11px; color: #000000; cursor: pointer; margin-right: 5px; }
+        .sap-button.primary { background: #4a90e2; color: #ffffff; border: 1px solid #357abd; }
+        .status-indicator { padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; }
+        .status-good { background: #d4edda; color: #155724; }
+        .status-warning { background: #fff3cd; color: #856404; }
+        .status-pending { background: #cce7ff; color: #0066cc; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .sap-info-box { background: #fff3cd; border: 1px solid #ffc107; padding: 10px; margin: 10px 0; font-size: 11px; }
+        .sap-success-box { background: #d4edda; border: 1px solid #28a745; padding: 10px; margin: 10px 0; font-size: 11px; }
+        .workflow-steps { display: flex; align-items: center; gap: 10px; margin: 15px 0; padding: 10px; background: #f8f9fa; border: 1px solid #e9ecef; }
+        .workflow-step { background: #ffffff; border: 1px solid #cccccc; padding: 8px 12px; text-align: center; min-width: 100px; font-size: 10px; }
+        .workflow-arrow { font-size: 16px; color: #666666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Vistex RevFlow System Mockups</h1>
+            <p>US Foods F&B Institutional Customer Deal - Authentic SAP Interface</p>
+        </div>
+
+        <!-- Step 1: Create Prospect Quote -->
+        <div class="mockup-section">
+            <div class="mockup-header">Step 1: Create Prospect Quote - Customer Setup</div>
+            <div class="browser-bar">🌐 https://revflow.vistex.com/webdynpro/sap/zrf_quote_create</div>
+            <div class="system-interface">
+                <div class="sap-header">
+                    <div class="sap-logo">SAP</div>
+                    <div style="flex: 1; text-align: center;">Create Quote for Prospect Customer</div>
+                    <div class="user-info">Sarah Williams | SWILLIAMS | Logout</div>
+                </div>
+                <div class="sap-content">
+                    <div class="sap-section">
+                        <div class="sap-section-header">Customer Information</div>
+                        <div class="sap-section-content">
+                            <div class="sap-form-row">
+                                <div class="sap-form-group">
+                                    <label>Company Name *</label>
+                                    <input type="text" value="US Foods" class="highlight">
+                                </div>
+                                <div class="sap-form-group">
+                                    <label>Customer Type</label>
+                                    <select class="highlight">
+                                        <option>F&B Institutional</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="sap-form-row">
+                                <div class="sap-form-group">
+                                    <label>Primary Contact</label>
+                                    <input type="text" value="Michael Chen - Procurement Manager">
+                                </div>
+                                <div class="sap-form-group">
+                                    <label>Annual Volume Est.</label>
+                                    <input type="text" value="2,300,000.00 USD" class="highlight">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="sap-button primary">Continue to Material Selection</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Material Search -->
+        <div class="mockup-section">
+            <div class="mockup-header">Step 2: Material Search and Selection</div>
+            <div class="browser-bar">🌐 https://revflow.vistex.com/webdynpro/sap/zrf_material_search</div>
+            <div class="system-interface">
+                <div class="sap-header">
+                    <div class="sap-logo">SAP</div>
+                    <div style="flex: 1; text-align: center;">Material Selection - Quote QT-2025-0847</div>
+                    <div class="user-info">US Foods | Sarah Williams | SWILLIAMS</div>
+                </div>
+                <div class="sap-tabs">
+                    <div class="sap-tab active">Material</div>
+                    <div class="sap-tab">Pricing</div>
+                    <div class="sap-tab">Rebate Eligibility</div>
+                    <div class="sap-tab">Margin Analysis</div>
+                </div>
+                <div class="sap-content">
+                    <table class="sap-table">
+                        <thead>
+                            <tr>
+                                <th>✓</th>
+                                <th>Material</th>
+                                <th>Material Description</th>
+                                <th>List Price</th>
+                                <th>Compliance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" checked></td>
+                                <td class="highlight">FGC2001</td>
+                                <td>PROCLEAN FOOD SURFACE SANITIZER 1 GAL</td>
+                                <td>12.45</td>
+                                <td>FDA,NSF</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" checked></td>
+                                <td class="highlight">FGC2015</td>
+                                <td>HEAVY DUTY DEGREASER FOOD SAFE 5 GAL</td>
+                                <td>89.30</td>
+                                <td>FDA,USDA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="sap-info-box">
+                        <strong>Selection Summary:</strong> 47 materials selected | Estimated Annual Value: $2,347,500.00 USD
+                    </div>
+                    <button class="sap-button primary">Continue to Pricing</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Competitive Pricing -->
+        <div class="mockup-section">
+            <div class="mockup-header">Step 3: Competitive Pricing and Margin Analysis</div>
+            <div class="browser-bar">🌐 https://revflow.vistex.com/webdynpro/sap/zrf_pricing_competitive</div>
+            <div class="system-interface">
+                <div class="sap-header">
+                    <div class="sap-logo">SAP</div>
+                    <div style="flex: 1; text-align: center;">Pricing Analysis - Quote QT-2025-0847</div>
+                    <div class="user-info">US Foods | Sarah Williams | SWILLIAMS</div>
+                </div>
+                <div class="sap-content">
+                    <div class="sap-section">
+                        <div class="sap-section-header">Competitive Intelligence</div>
+                        <div class="sap-section-content">
+                            <div class="sap-form-row">
+                                <div class="sap-form-group">
+                                    <label>Current Supplier</label>
+                                    <input type="text" value="CleanPro Industrial" readonly>
+                                </div>
+                                <div class="sap-form-group">
+                                    <label>Target Discount</label>
+                                    <input type="text" value="10.0%" class="highlight">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="sap-table">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>List Price</th>
+                                <th>Final Price</th>
+                                <th>Margin %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>FGC2001</td>
+                                <td>12.45</td>
+                                <td class="highlight">11.21</td>
+                                <td><span class="status-indicator status-good">18.2%</span></td>
+                                <td><span class="status-indicator status-good">Good</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="sap-info-box">
+                        <strong>Pricing Summary:</strong> Blended Margin: 17.6% | Our Price vs Competitor: -22% | Win Probability: 85%
+                    </div>
+                    <button class="sap-button primary">Submit for Approval</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Approval Workflow -->
+        <div class="mockup-section">
+            <div class="mockup-header">Step 4: Quote Approval Workflow</div>
+            <div class="browser-bar">🌐 https://revflow.vistex.com/webdynpro/sap/zrf_approval_workflow</div>
+            <div class="system-interface">
+                <div class="sap-header">
+                    <div class="sap-logo">SAP</div>
+                    <div style="flex: 1; text-align: center;">Approval Management - Quote QT-2025-0847</div>
+                    <div class="user-info">US Foods | Sarah Williams | SWILLIAMS</div>
+                </div>
+                <div class="sap-content">
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <strong>Sarah Williams</strong><br>
+                            <small>Sales Rep</small><br>
+                            <span class="status-indicator status-approved">Submitted</span>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <strong>Mike Rodriguez</strong><br>
+                            <small>Regional Sales Mgr</small><br>
+                            <span class="status-indicator status-pending">Pending</span>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <strong>System</strong><br>
+                            <small>Auto-Generate</small><br>
+                            <span class="status-indicator">Ready</span>
+                        </div>
+                    </div>
+                    <div class="sap-success-box">
+                        <strong>Quote Submitted Successfully!</strong> Notification sent to Mike Rodriguez.
+                    </div>
+                    <button class="sap-button primary">View Quote Summary</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Final Quote -->
+        <div class="mockup-section">
+            <div class="mockup-header">Step 5: Approved Quote - Ready for Customer</div>
+            <div class="browser-bar">🌐 https://revflow.vistex.com/webdynpro/sap/zrf_quote_output</div>
+            <div class="system-interface">
+                <div class="sap-header">
+                    <div class="sap-logo">SAP</div>
+                    <div style="flex: 1; text-align: center;">Quote Output - QT-2025-0847</div>
+                    <div class="user-info">US Foods | Sarah Williams | SWILLIAMS</div>
+                </div>
+                <div class="sap-content">
+                    <div class="sap-success-box">
+                        <strong>Quote Approved by Mike Rodriguez</strong><br>
+                        Approved: 13.06.2025 14:23 | Notes: "Excellent opportunity - strategic customer"
+                    </div>
+                    <table class="sap-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Items</th>
+                                <th>List Value</th>
+                                <th>Final Value</th>
+                                <th>Savings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Food Grade Cleaners</td>
+                                <td>18</td>
+                                <td>956,400.00</td>
+                                <td class="highlight">860,760.00</td>
+                                <td>95,640.00</td>
+                            </tr>
+                            <tr>
+                                <td>Heavy Duty Degreasers</td>
+                                <td>8</td>
+                                <td>487,200.00</td>
+                                <td class="highlight">438,480.00</td>
+                                <td>48,720.00</td>
+                            </tr>
+                            <tr style="background: #e6f3ff; font-weight: bold;">
+                                <td><strong>TOTAL</strong></td>
+                                <td><strong>47</strong></td>
+                                <td><strong>2,615,700.00</strong></td>
+                                <td class="highlight"><strong>2,350,416.00</strong></td>
+                                <td><strong>265,284.00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="sap-info-box">
+                        <strong>Key Points:</strong> 22% below competitor | Annual savings: $265,284 | FDA/NSF certified
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button class="sap-button primary">Generate PDF</button>
+                        <button class="sap-button">Email Customer</button>
+                        <button class="sap-button">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Connection -->
+        <div class="mockup-section">
+            <div class="mockup-header">Training Impact - From UAT to Business Skills</div>
+            <div style="background: #2d2d2d; color: #ffffff; padding: 20px;">
+                <h2 style="color: #ffffff;">Real SAP Interface = Better Training Adoption</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 20px 0;">
+                    <div>
+                        <h3 style="color: #ff6b6b;">❌ Traditional UAT Training</h3>
+                        <div style="background: #404040; padding: 20px; border-radius: 8px; border-left: 5px solid #ff6b6b;">
+                            • "Click Material tab in SAP"<br>
+                            • "Test search filtering functionality"<br>
+                            • "Verify pricing calculations"<br>
+                            • <em>Focus: Technical validation</em>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: #51cf66;">✅ Business Scenario Training</h3>
+                        <div style="background: #404040; padding: 20px; border-radius: 8px; border-left: 5px solid #51cf66;">
+                            • "Win F&B deals like US Foods"<br>
+                            • "Beat competitors with smart pricing"<br>
+                            • "Optimize margins using SAP tools"<br>
+                            • <em>Focus: Business success</em>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: #404040; padding: 20px; border-radius: 8px; border: 2px solid #666666;">
+                    <h3 style="color: #ffffff;">🎯 What Sales Reps Actually Learn</h3>
+                    <p style="color: #cccccc;">Master real SAP navigation, make smart business decisions, handle competitive pricing, and navigate approvals efficiently - all in the context of winning F&B institutional deals like US Foods.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
